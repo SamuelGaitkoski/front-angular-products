@@ -1,0 +1,35 @@
+<!-- apagamos o arquivo product-dialog.component.spec -->
+<!-- temos vários exemplos de uso do componente Dialog no site do Angular Material -->
+<!-- como utilizamos o mesmo modal para um novo registro e edição de registro, o titulo vai mudar dependendo do que for, utilizamos o mesmo modal porque é muito melhor assim, isso vamos fazer no método ngOnInit() no product-dialog-component.ts -->
+<!-- vamos usar o ngIf do angular, pois com ele podemos validar e alterar nosso elemento baseado em uma condição -->
+<!-- se isChange for true, vai exibir o titulo para edição de um produto -->
+<h1 *ngIf="isChange" mat-dialog-title>Edit product</h1>
+<!-- se o isChange for false, vai exibir o titulo para registro de um novo produto -->
+<h1 *ngIf="!isChange" mat-dialog-title>Register product</h1>
+<!-- faremos o mesmo na parte do botão la de baixo da modal, para Cadastrar e Atualizar -->
+<div mat-dialog-content class="div-campos">
+    <!-- campos de texto -->
+    <!-- vamos trocar para o que ele está passando ali, data.name, data.price e data.category -->
+    <!-- deixamos o mat-form-field sem appearance fill nenhum -->
+    <!-- botamos type number para os campos numericos, dai não aceita letras e mostra o indicador para aumentar os numeros -->
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="data.name">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Price</mat-label>
+    <input type="number" matInput [(ngModel)]="data.price">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <input type="number" matInput [(ngModel)]="data.category">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <!-- evento para cancelar a criação do produto, vamos criar o método onCancel no product-dialog.component.ts -->
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <!-- vamos deixar só o data ali, sem o data.animal e titulo Register para cadastrar um novo produto -->
+  <!-- color primary no botão de registrar um novo produto -->
+  <button *ngIf="isChange" mat-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>Update</button>
+  <button *ngIf="!isChange" mat-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>Register</button>
+</div>

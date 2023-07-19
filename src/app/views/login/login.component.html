@@ -1,0 +1,32 @@
+<!-- essa é nossa página para o login, para gerar esse componente demos um ng g c views/login -->
+<!-- para mapearmos essa rota vamos no app-rounting.module.ts, e adicionamos a rota e o componente login também, que será aberto na rota raiz ('') -->
+<!-- Excluimos o arquivo login.component.spec.ts, pois não vamos utilizá-lo -->
+<!-- no arquivo login.component.ts vamos criar as propriedade email e password que definimos para os campos -->
+
+<!-- vamos criar aqui nossa pagina de login -->
+<div class="container">
+    <!-- vamos criar um formulario aqui -->
+    <!-- pegamos alguns campos que são componentes da biblioteca Angular Material. -->
+    <!-- nos campos botamos o type email e o type password aqui (dai ele esconde a senha para nós) -->
+    <!-- vamos colocar também uma mensagem informando quando o email/senha forem inválidos -->
+    <!-- class message para estilizarmos depois -->
+    <!-- colocamos a propriedade message criada no login.component.ts aqui, dai inicialmente, como não atribuimos nada a essa propriedade, ela vai estar vazia. Então, quando nossa api retornar erro, adicionamos um valor a essa propriedade -->
+    <!-- quando for clicado no botão de login vai ser executado o método login(), que recebe o email e password como parametro -->
+    <div class="content">
+        <h1>Login</h1>
+          <mat-form-field>
+            <mat-label>Email</mat-label>       
+            <input matInput type="email" [(ngModel)]="email">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input type="password" matInput [(ngModel)]="password">
+          </mat-form-field>
+     
+          <span class="message">{{message}}</span>
+          <button class="login-button" mat-raised-button color="primary" (click)="login(email, password)">Login</button>
+          <button class="register-button" mat-raised-button color="primary" (click)="openRegisterView()">Register</button>
+    </div>
+</div>
+
+

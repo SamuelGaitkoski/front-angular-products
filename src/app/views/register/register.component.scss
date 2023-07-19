@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightsteelblue;
+    // div ocupar a tela toda.
+    height: 100vh;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 500px;
+    height: 450px;
+    background-color: aliceblue;
+    padding: 40px;
+    // border-radius é para ficar com a borda arredondada
+    border-radius: 12px;
+}
+
+.errorMessage {
+    color: red;
+}
+
+.successMessage {
+    color: green;
+}
+
+.login-button {
+    margin-top: 25px;
+}
+
+.register-button {
+    margin-top: 12px;
+}

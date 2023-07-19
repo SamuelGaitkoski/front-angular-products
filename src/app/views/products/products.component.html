@@ -1,0 +1,71 @@
+<!-- vamos começar a criar e estilizar nossa tela -->
+<!-- vamos instalar o Angular Material, que é uma biblioteca front-end para o Angular, que usa o Material do Google, vamos usar ele para fazer a parte de estilização da nossa aplicação -->
+<!-- instalamos a biblioteca no nosso projeto dando: ng add @angular/material, selecionamos tema das cores, setar a tipografia global (yes), animações (no) -->
+<!-- site Angular Material, que tem vários componentes para usarmos: material.angular.io -->
+
+<!-- colando aqui o exemplo do componente toolbar que pegamos da Angular Material, indo em view code no site -->
+<!-- color primary pega a cor primaria do tema de cores que escolhemos da Angular Material -->
+<mat-toolbar class="topbar" color="primary">
+    <span>Products Web</span>
+    <button class="topbar-button" color="primary" mat-stroked-button (click)="logout()">Logout</button>
+</mat-toolbar>
+
+<!-- criando botão para criar um novo produto -->
+<!-- Dialog é um componente do Angular Material, que é uma modal que vamos usar para colocar os campos do novo produto que será criado e fazer o submit para ele criar o novo produto, é o que vai servir de formulário para nós -->
+<!-- método openDialog vamos criar no product.component.ts -->
+<!-- Agora vamos criar nosso Dialog/formulário, dando um ng g c shared/product-dialog, criando o componente em uma pasta fora das views pois não é uma view (tela) -->
+<div class="header">
+  <h1>Products</h1>
+    <button mat-fab color="primary" aria-label="Add new product" (click)="openDialog(null)">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>
+
+<!-- Antes de pegarmos uma tabela para listar a mesma, vamos criar um modelo para o nosso front-end -->
+<!-- agora que criamos nosso modelo em app/models/Product, vamos pegar uma tabela no Angular Material -->
+<!-- pegamos o componente Table do Angular Material -->
+<!-- agora pegamos o html da tabela e colocamos aqui para adaptar para o que precisaremos -->
+<!-- nosso dataSource é nossa fonte de dados, dizemos que é um array de produtos, que é o products que criamos no products.component.ts -->
+<div class="table">
+    <table mat-table #table [dataSource]="products" class="mat-elevation-z8">
+        <!-- colunas que vamos mostrar -->
+        <!-- no matColumnDef de cada coluna vamos colocar o que definimos no displayedColumns, mesmos nomes -->
+        <!-- trocamos element por product, definindo o que do array vai ser determinado para cada coluna, product.name, product.price, etc -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let product"> {{product.name}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef> Price </th>
+          <td mat-cell *matCellDef="let product"> {{product.price}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef> Category </th>
+          <td mat-cell *matCellDef="let product"> {{product.category}} </td>
+        </ng-container>
+      
+        <!-- coluna com os botões de editar e apagar cada registro -->
+        <!-- o actions não precisa dessa linha do product, product.actions, não tem isso -->
+        <!-- vamos colocar os botões na coluna de ações agora, pegando do componente Button da Angular Material, e colocando dentro da coluna actions -->
+        <!-- botamos os botões com eventos de click para alterar o produto e deletar o produto, passando o produto por parametro e o id do produto por parametro -->
+        <!-- os métodos chamado no click, chamando os métodos do back serão criados no products.component.ts -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let product">
+            <button mat-icon-button (click)="updateProduct(product)" color="primary">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="deleteProduct(product.id)" color="primary">
+                <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+      
+        <!-- parte da configuração do que queremos exibir de colunas, que vamos configurar no products.component.ts -->
+        <!-- no displayedColumns colocamos as colunas que vamos exibir, definimos o displayedColumns no products.component.ts -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+</div>
